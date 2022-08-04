@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--别名.给类名起别名,引用时可以省略路径,只写类名(不区分大小写)-->
+    <typeAliases>
+        <package name="com.fddxi.pojo"/>
+    </typeAliases>
+    <!--
+    environments环境配置(可以配置多个环境)
+    通过default切换不同的environment
+    -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!--数据库连接信息-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql:///db1?useSSL=false&amp;useServerPrepStmts=true"/>
+                <property name="username" value="root"/>
+                <property name="password" value="200011"/>
+            </dataSource>
+        </environment>
+        <environment id="test">
+            <!--事务管理方式(不用改)-->
+            <transactionManager type="JDBC"/>
+            <!--数据库连接池-->
+            <dataSource type="POOLED">
+                <!--数据库连接信息-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql:///mybatis?useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="200011"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--扫描mapper-->
+        <!--加载sql映射文件-->
+<!--        <mapper resource="com/fddxi/mapper/UserMapper.xml"/>-->
+        <!--Mapper代理方式-->
+        <package name="com.fddxi.mapper"/>
+    </mappers>
+</configuration>
